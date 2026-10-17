@@ -12,6 +12,6 @@ class Ticket(db.Model):
     created_at=db.Column(db.DateTime, default=lambda:datetime.now(timezone.utc), nullable=False)
     updated_at=db.Column(db.DateTime, default=lambda:datetime.now(timezone.utc), onupdate=lambda:datetime.now(timezone.utc), nullable=False)
     created_by=db.relationship("User", foreign_keys=[created_by_id], back_populates="created_tickets")
-    # TODO LAB 3: Add the assigned-user relationship.
+    assigned_to=db.relationship("User", foreign_keys=[assigned_to_id], back_populates="assigned_tickets")
     def to_dict(self):
-        return {"id":self.id,"title":self.title,"description":self.description,"priority":self.priority,"category":self.category,"status":self.status,"created_by":self.created_by.to_dict() if self.created_by else None,"assigned_to": None,"created_at":self.created_at.isoformat(),"updated_at":self.updated_at.isoformat()}
+        return {"id":self.id,"title":self.title,"description":self.description,"priority":self.priority,"category":self.category,"status":self.status,"created_by":self.created_by.to_dict() if self.created_by else None,"assigned_to":self.assigned_to.to_dict() if self.assigned_to else None,"created_at":self.created_at.isoformat(),"updated_at":self.updated_at.isoformat()}

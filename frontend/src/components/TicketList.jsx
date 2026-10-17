@@ -1,0 +1,1 @@
+export default function TicketList({tickets,onSelect,loading,error}){if(loading)return <p>Loading tickets...</p>;if(error)return <p>{error}</p>;if(!tickets.length)return <p>No tickets found.</p>;return <section><h2>Ticket queue</h2>{tickets.map(t=><button key={t.id} onClick={()=>onSelect(t)}>{t.title} - {t.status}</button>)}</section>}
